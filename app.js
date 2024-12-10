@@ -33,6 +33,7 @@ loadData();
 
 ///////////////////////////////////////////////////////////////////
 
+// 접기, 펴기
 moveSelectedList.onclick=(e)=>{
     if(selectedList.classList.contains("resize")){
         selectedList.classList.remove("resize");
@@ -42,6 +43,7 @@ moveSelectedList.onclick=(e)=>{
         moveSelectedList.innerText="펴기";
     }
 }
+
 
 const basketCont = document.querySelector("#basketCont");
 const totalPriceB = document.querySelector("#totalPriceB");
