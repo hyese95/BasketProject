@@ -20,11 +20,12 @@ const loadData=async function(){
     let objArr=await Promise.all(resArr.map((res)=>res.json()));
         // resArr[0].json(),
         // resArr[1].json
-    console.log(objArr);
+    // console.log(objArr);
 
     const loginUser=objArr[0];
     const products=objArr[1];
     // baskets?user_id=jhs; -> jhsBaskets.json
+    // 장바구니 데이터 로드
     let res3=await fetch(`./${loginUser["user_id"]}Baskets.json`);
     let baskets=await res3.json();
     console.log(baskets);
@@ -108,10 +109,10 @@ const printBasketsObj=()=>{
             basketCont.append(tr);
         }
         basketsObj.updateTotal();
-        totalPriceB.innerText = basketsObj["total"];
+        totalPriceB.innerText = basketsObj.total;
 }
 const loadBasketsFunc=()=>{
-    const req=new XMLHttpRequest();
+    const req= new XMLHttpRequest();
     req.open("GET", "./jhsBaskets.json");
     req.send();
     req.onload=()=>{
@@ -121,13 +122,6 @@ const loadBasketsFunc=()=>{
         }
         basketsObj=JSON.parse(req.responseText);
         Object.setPrototypeOf(basketsObj, BasketsObj.prototype);
-        for(let num in basketsObj){
-            if(isNaN(num)) continue;
-            let basket=basketsObj[num];
-            delete basketsObj[num];
-            num=Number(num);
-            basketsObj[num]=basket;
-        }
         printBasketsObj();
     }
 }
