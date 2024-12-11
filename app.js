@@ -33,7 +33,6 @@ loadData();
 
 ///////////////////////////////////////////////////////////////////
 
-// 접기, 펴기
 moveSelectedList.onclick=(e)=>{
     if(selectedList.classList.contains("resize")){
         selectedList.classList.remove("resize");
@@ -44,15 +43,14 @@ moveSelectedList.onclick=(e)=>{
     }
 }
 
-
-const basketCont = document.querySelector("#basketCont");
-const totalPriceB = document.querySelector("#totalPriceB");
-const loadBasketsBtn = document.querySelector("#loadBasketsBtn");
-const basketEx = document.querySelector("#basketEx");
-let basketsObj = {};
+const basketCont=document.querySelector("#basketCont");
+const totalPriceB=document.querySelector("#totalPriceB");
+const loadBasketsBtn=document.querySelector("#loadBasketsBtn");
+const basketEx=document.querySelector("#basketEx");
+let basketsObj={};
 class BasketsObj{
     constructor() {
-        this.total = 0;
+        this.total=0;
     }
     setBasket(basket){        
         if(this[basket.num]){
@@ -63,12 +61,17 @@ class BasketsObj{
         }
     }
     delBasket(num){
-        if(num in this){
+        if(this[num]){
             this.total-=this[num].total;
             delete this[num];
         }else{
             alert("이미 삭제된 상품");
         }
+    }
+    updateTotal(){
+        this.total=Object.values(this)
+            .filter(item => typeof item === 'object')
+            .reduce((sum, item) => sum + item.total, 0);
     }
 }
 function Basket(form){
@@ -78,22 +81,22 @@ function Basket(form){
     this.title=form.title.value;
     this.total=this.cnt*this.price;
 }
-const submitHandeler = function (e) {
+const submitHandeler=function(e){
     e.preventDefault();
     let basket=new Basket(this);
     basketsObj.setBasket(basket);
     printBasketsObj();
 }
 const printBasketsObj=()=>{
-    basketCont.innerHTML = ""
-        for (let num in basketsObj) {
+    basketCont.innerHTML=""
+        for(let num in basketsObj){
             if(isNaN(num)) continue; 
-            let basket = basketsObj[num];
-            let tr = basketEx.cloneNode(true);
+            let basket=basketsObj[num];
+            let tr=basketEx.cloneNode(true);
             tr.removeAttribute("id");
-            for (let key in basket) { 
-                let td = tr.querySelector("." + key);
-                td.append(document.createTextNode(basket[key]));
+            for(let key in basket){ 
+                let td=tr.querySelector("." + key);
+                if(td)td.append(document.createTextNode(basket[key]));
             }
             let delBtn=tr.querySelector(".delBtn");
             delBtn.dataset.num=basket.num;    
@@ -104,58 +107,59 @@ const printBasketsObj=()=>{
             } 
             basketCont.append(tr);
         }
+        basketsObj.updateTotal();
         totalPriceB.innerText = basketsObj["total"];
 }
-const loadBasketsFunc = () => {
-    const req = new XMLHttpRequest();
+const loadBasketsFunc=()=>{
+    const req=new XMLHttpRequest();
     req.open("GET", "./jhsBaskets.json");
     req.send();
-    req.onload = () => {
-        if (req.status !== 200) { 
+    req.onload=()=>{
+        if(req.status !== 200){ 
             alert("요청 실패, 다시 시도");
             return;
         }
-        basketsObj = JSON.parse(req.responseText);
-        Object.setPrototypeOf(basketsObj,BasketsObj.prototype);
-        for (let num in basketsObj) {
+        basketsObj=JSON.parse(req.responseText);
+        Object.setPrototypeOf(basketsObj, BasketsObj.prototype);
+        for(let num in basketsObj){
             if(isNaN(num)) continue;
-            let basket = basketsObj[num];
+            let basket=basketsObj[num];
             delete basketsObj[num];
-            num = Number(num);
-            basketsObj[num] = basket;
+            num=Number(num);
+            basketsObj[num]=basket;
         }
         printBasketsObj();
     }
 }
-loadBasketsBtn.onclick = loadBasketsFunc;
+loadBasketsBtn.onclick=loadBasketsFunc;
 
-const loadProductsBtn = document.getElementById(" loadProductsBtn");
-const productList = document.getElementById("productList");
-const productEx = document.getElementById("productEx");
+const loadProductsBtn=document.getElementById(" loadProductsBtn");
+const productList=document.getElementById("productList");
+const productEx=document.getElementById("productEx");
 
-const loadProducts = () => {
-    const req = new XMLHttpRequest();
+const loadProducts=()=>{
+    const req=new XMLHttpRequest();
     req.open("GET", "./products.json");
     req.send();
-    req.onload = () => {
-        if (req.status !== 200) {
+    req.onload=()=>{
+        if(req.status !== 200){
             alert("데이터 불러오기 실패, 다시 시도");
             return;
         }
-        let products = JSON.parse(req.responseText);
-        products.forEach((p) => {
-            let ex = productEx.cloneNode(true);
+        let products=JSON.parse(req.responseText);
+        products.forEach((p)=>{
+            let ex=productEx.cloneNode(true);
             ex.removeAttribute("id");
-            for (let key in p) {
-                let node = ex.querySelector("." + key);
-                let form = ex.querySelector(".basketForm");
-                if (key === "img[src]") {
-                    node.src = p[key];
-                } else {
+            for(let key in p){
+                let node=ex.querySelector("." + key);
+                let form=ex.querySelector(".basketForm");
+                if(key === "img[src]"){
+                    node.src=p[key];
+                }else{
                     node?.append(document.createTextNode(p[key]));
-                    form[key].value = p[key];
+                    form[key].value=p[key];
                 }
-                form.onsubmit = submitHandeler;
+                form.onsubmit=submitHandeler;
             }
             productList.append(ex);
         });
