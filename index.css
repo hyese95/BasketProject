@@ -1,7 +1,17 @@
 body {
-    background-color: #f4f4f9;
+    background-color: #f9f9f9;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+}
+h1 {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #f4f4f4;
 }
 #productList {
     list-style: none;
@@ -9,68 +19,83 @@ body {
     margin: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 20px;
 }
 #productList > li {
-    width: 220px;
+    width: 240px;
     background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin: 10px;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+#productList > li:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 #productList > li > div > img {
     width: 100%;
     height: 180px;
     object-fit: cover;
 }
-#productList > li:hover {
-    transform: translateY(-5px);
+.basketForm {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.basketForm input[type="number"] {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.basketForm button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.basketForm button:hover {
+    background-color: #45a049;
 }
 #selectedList {
     width: 100%;
-    height: 200px;
-    background-color: #fff8e1;
+    background-color: #fff;
+    padding: 15px;
+    border-top: 2px solid #eee;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
     position: sticky;
     bottom: 0;
-    border-top: 2px solid #f1f1f1;
-    transition: transform 0.3s ease-in-out;
-    overflow-y: auto;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    transition: transform 0.3s ease;
 }
 .resize {
-    transform: translateY(calc(100% - 40px));
-}
-table, th {
-    border-collapse: collapse;
-    text-align: center;
-    width: 50px;
-}
-td.title{
-    width: 100%;
-}
-#resultTable > thead > tr > th {
-    border-bottom: 1px solid #ddd;
-    background-color: #f4f4f4; 
-    padding: 10px;
-    font-weight: bold;
+    transform: translateY(calc(100% - 60px));
 }
 #resultTable {
     width: 100%;
-    padding: 5px;
-    background-color: #fff;
+    border-collapse: collapse;
 }
-#resultTable > tbody > tr > td {
-    padding: 10px;
-    border-bottom: 1px solid #f1f1f1;
+#resultTable th, #resultTable td {
+    padding: 12px;
+    text-align: center;
+}
+#resultTable th {
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #ddd;
 }
 .delBtn {
     background-color: #e57373;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 6px 12px;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -78,40 +103,23 @@ td.title{
 .delBtn:hover {
     background-color: #d32f2f;
 }
-#productEx {
-    display: none !important;
-}
-#basketEx {
-    display: none;
-}
 #totalPriceB {
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 1.5rem;
     color: #2c6bcf;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 15px;
 }
 #moveSelectedList {
     background-color: #4caf50;
     color: white;
     border: none;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
     font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 #moveSelectedList:hover {
     background-color: #388e3c;
-}
-#productList > li > div > img {
-    width: 100%;
-    height: auto; 
-    object-fit: cover; 
-    object-position: center; 
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-#productList > li:hover img {
-    transform: scale(1.05); 
-    transition: transform 0.3s ease; 
 }
