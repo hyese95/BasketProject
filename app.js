@@ -51,6 +51,9 @@ const loadBasketsBtn = document.querySelector("#loadBasketsBtn");
 const basketEx = document.querySelector("#basketEx");
 let basketsObj = {};
 class BasketsObj{
+    constructor() {
+        this.total = 0;
+    }
     setBasket(basket){        
         if(basket.num in this){
             alert("장바구니에 이미 존재함")
@@ -98,7 +101,7 @@ const printBasketsObj=()=>{
                 let delNum=e.target.dataset.num;
                 basketsObj.delBasket(delNum);
                 printBasketsObj();
-            }
+            } 
             basketCont.append(tr);
         }
         totalPriceB.innerText = basketsObj["total"];
