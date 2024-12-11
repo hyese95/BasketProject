@@ -55,7 +55,7 @@ class BasketsObj{
         this.total = 0;
     }
     setBasket(basket){        
-        if(basket.num in this){
+        if(this[basket.num]){
             alert("장바구니에 이미 존재함")
         }else{
             this[basket.num]=basket;
