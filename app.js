@@ -50,9 +50,6 @@ const loadBasketsBtn=document.querySelector("#loadBasketsBtn");
 const basketEx=document.querySelector("#basketEx");
 let basketsObj={};
 class BasketsObj{
-    constructor() {
-        this.total=0;
-    }
     setBasket(basket){        
         if(this[basket.num]){
             alert("장바구니에 이미 존재함")
@@ -68,11 +65,6 @@ class BasketsObj{
         }else{
             alert("이미 삭제된 상품");
         }
-    }
-    updateTotal(){
-        this.total=Object.values(this)
-            .filter(item => typeof item === 'object')
-            .reduce((sum, item) => sum + item.total, 0);
     }
 }
 function Basket(form){
@@ -97,7 +89,7 @@ const printBasketsObj=()=>{
             tr.removeAttribute("id");
             for(let key in basket){ 
                 let td=tr.querySelector("." + key);
-                if(td)td.append(document.createTextNode(basket[key]));
+                td.append(document.createTextNode(basket[key]));
             }
             let delBtn=tr.querySelector(".delBtn");
             delBtn.dataset.num=basket.num;    
@@ -108,8 +100,7 @@ const printBasketsObj=()=>{
             } 
             basketCont.append(tr);
         }
-        basketsObj.updateTotal();
-        totalPriceB.innerText = basketsObj.total;
+        totalPriceB.innerText = basketsObj["total"];
 }
 const loadBasketsFunc=()=>{
     const req= new XMLHttpRequest();
@@ -122,6 +113,13 @@ const loadBasketsFunc=()=>{
         }
         basketsObj=JSON.parse(req.responseText);
         Object.setPrototypeOf(basketsObj, BasketsObj.prototype);
+        for (let num in basketsObj) { 
+            if(isNaN(num)) continue;
+            let basket = basketsObj[num];
+            delete basketsObj[num];
+            num = Number(num);
+            basketsObj[num] = basket;
+        }
         printBasketsObj();
     }
 }
