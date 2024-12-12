@@ -1,9 +1,5 @@
 // container.innerText="???"; // defer 테스트
 
-// project
-// 1. 로그인 유저를 먼저 불러오기 (상품 리스트, 공휴일 데이터)
-// 2. 그 유저와 관련된 데이터 불러오기(장바구니, 스케줄)
-
 const loadData=async function(){
     // let res=await fetch("./loginUser.json");
     // let user=await res.json();
