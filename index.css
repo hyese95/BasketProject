@@ -60,6 +60,9 @@ h1:hover {
     object-position: center;
     filter: brightness(0.8);
 }
+#productEx{
+    display: none !important;
+}
 .basketForm {
     padding: 15px;
     display: flex;
