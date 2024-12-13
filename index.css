@@ -1,17 +1,20 @@
 body {
-    background-color: #f9f9f9;
+    background-color: #121212;
     font-family: 'Arial', sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 0; 
+    color: #e0e0e0;
 }
 h1 {
-    background-color: #1e3a8a;
+    background-color: #121212;
+    background-image: linear-gradient(135deg, #121212, #1f1f1f);
     color: white;
     padding: 20px;
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 20px;
-    border-bottom: 4px solid #f4f4f4;
+    border-bottom: 4px solid #333;
+    letter-spacing: 1px;
 }
 #productList {
     list-style: none;
@@ -20,26 +23,28 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
 }
 #productList > li {
     width: 240px;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #1f1f1f;;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     margin: 10px;
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
+    border: 1px solid #333;
 }
 #productList > li:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 #productList > li > div > img {
     width: 100%;
     height: 180px;
     object-fit: cover;
+    filter: brightness(0.8);
 }
 .basketForm {
     padding: 15px;
@@ -49,29 +54,31 @@ h1 {
 }
 .basketForm input[type="number"] {
     margin-bottom: 10px;
-    padding: 5px;
-    width: 50px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 10px;
+    width: 60px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background-color: #333;
+    color: #fff;
 }
 .basketForm button {
-    padding: 8px 16px;
-    background-color: #4CAF50;
+    padding: 10px 20px;
+    background-color: #00796b;;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 .basketForm button:hover {
-    background-color: #45a049;
+    background-color: #004d40;
 }
 #selectedList {
     width: 100%;
-    background-color: #fff;
+    background-color: #1e1e1e;
     padding: 15px;
-    border-top: 2px solid #eee;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+    border-top: 2px solid #333;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
     position: sticky;
     bottom: 0;
     transition: transform 0.3s ease;
@@ -86,10 +93,12 @@ h1 {
 #resultTable th, #resultTable td {
     padding: 12px;
     text-align: center;
+    border: 1px solid #444;
 }
 #resultTable th {
-    background-color: #f1f1f1;
-    border-bottom: 1px solid #ddd;
+    background-color: #333;
+    color: #fff;
+    border-bottom: 2px solid #444;
 }
 .delBtn {
     background-color: #e57373;
@@ -101,25 +110,25 @@ h1 {
     transition: background-color 0.3s ease;
 }
 .delBtn:hover {
-    background-color: #d32f2f;
+    background-color: #c62828;
 }
 #totalPriceB {
-    font-size: 1.5rem;
-    color: #2c6bcf;
+    font-size: 1.6rem;
+    color: #4caf50;
     font-weight: bold;
     text-align: right;
     margin-top: 15px;
 }
 #moveSelectedList {
-    background-color: #4caf50;
+    background-color: #00796b;
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
 #moveSelectedList:hover {
-    background-color: #388e3c;
+    background-color: #004d40;
 }
